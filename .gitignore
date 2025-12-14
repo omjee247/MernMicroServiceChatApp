@@ -1,0 +1,51 @@
+# Node modules
+node_modules/
+
+# Build output
+dist/
+
+# Logs
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+*.log
+
+# Environment files
+.env
+*.env
+
+# MacOS system files
+.DS_Store
+
+# TypeScript build
+*.tsbuildinfo
+
+# Cache
+.cache/
+.tmp/
+
+# Coverage output (testing)
+coverage/
+
+# RabbitMQ & Redis dump files
+dump.rdb
+*.aof
+
+# ChatApp Backend folders
+Backend/**/node_modules/
+Backend/**/dist/
+
+# Frontend
+Frontend/node_modules/
+Frontend/dist/
+
+# Editor configs
+.vscode/
+.idea/
+
+# Swap files (VSCode, Vim)
+*.swp
+*.swo
+
+# OS junk (Windows)
+Thumbs.db
