@@ -1,5 +1,4 @@
 import amqp from 'amqplib';
-import { json } from 'express';
 import nodemailer from 'nodemailer';
 export const startSendOTPConsumer = async () => {
     try {
