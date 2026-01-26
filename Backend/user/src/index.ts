@@ -45,7 +45,7 @@ redisClient.on("error", (error)=>{console.log("Redis Client error:", error)});
 })();
 
 
-app.use("/api/user", userRoutes);
+app.use("/api/v1", userRoutes);
 
 
 

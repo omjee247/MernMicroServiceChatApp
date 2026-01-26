@@ -23,7 +23,7 @@ export const loginUser = tryCatch(async (req, res) => {
         body: `Your OTP code is ${otp}. It is valid for 5 minutes.`
     };
     await publishToQueue("send-otp", message);
-    res.status(200).json({ message: "OTP sent to your email successfuly" });
+    res.status(200).json({ message: "OTP sent to your email successfully" });
 });
 export const verifyUser = tryCatch(async (req, res) => {
     const { email, otp: enteredOTP } = req.body;

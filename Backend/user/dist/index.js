@@ -31,7 +31,7 @@ redisClient.on("error", (error) => { console.log("Redis Client error:", error); 
         console.log("Redis client connection error", error);
     }
 })();
-app.use("/api/user", userRoutes);
+app.use("/api/v1", userRoutes);
 app.listen(port, () => {
     console.log(`Server is running on ${port}`);
 });
