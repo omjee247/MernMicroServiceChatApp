@@ -5,6 +5,7 @@ import { redirect, useRouter } from 'next/navigation';
 import {ArrowRight, Layout, Loader2, Mail} from 'lucide-react';
 import { useAppData, user_service } from "@/context/AppContext";
 import Loading from "@/components/Loading";
+import toast from "react-hot-toast";
 
 const loginPage = () => {
 
@@ -24,11 +25,11 @@ const loginPage = () => {
       const {data} = await axios.post(`${user_service}/api/v1/login`,{
         email, 
       });
-      alert(data.message);
+      toast.success(data.message);
       router.push(`/verify?email=${email}`);
   }
   catch (error:any){
-    alert(error.response.data.message)
+    toast.error(error.response.data.message)
   }
   finally{
     setLoading(false);

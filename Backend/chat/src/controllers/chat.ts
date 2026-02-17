@@ -161,9 +161,13 @@ export const sendMessage = tryCatch(async (req: AuthenticatedRequest, res) => {
     };
 
     if(imageFile){
+        // multer-storage-cloudinary may place URL in different props depending on version
+        const fileAny: any = imageFile as any;
+        const imageUrl = fileAny.path || fileAny.secure_url || fileAny.url || fileAny.secureUrl;
+        const publicId = fileAny.filename || fileAny.public_id || fileAny.publicId;
         messageData.image = {
-            url : imageFile.path,
-            publicId: imageFile.filename
+            url: imageUrl,
+            publicId: publicId,
         };
 
         messageData.messageType = 'image';
@@ -177,6 +181,11 @@ export const sendMessage = tryCatch(async (req: AuthenticatedRequest, res) => {
     const message = new Messages(messageData);
 
     const savedMessage = await message.save();
+    // Debug logs: inspect uploaded file info and saved message
+    if (imageFile) {
+        console.log('Uploaded file (multer):', imageFile);
+        console.log('Saved message image:', savedMessage.image);
+    }
 
     const latestMessageText = imageFile ? "📷 Image" : text;
 

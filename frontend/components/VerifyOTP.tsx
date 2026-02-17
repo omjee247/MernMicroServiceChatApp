@@ -7,10 +7,11 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useAppData, user_service } from '@/context/AppContext';
 import Loading from './Loading';
+import toast from 'react-hot-toast';
 
 const VerifyOTP= () => {
 
-    const {isAuth, setIsAuth, setUser, loading : userLoading} = useAppData();
+    const {isAuth, setIsAuth, setUser, loading : userLoading, fetchChats, fetchUsers} = useAppData();
 
     const [loading, setLoading] = useState(false);
     const [otp, setOtp] = useState<string[]>(["","","","","",""]);
@@ -85,7 +86,7 @@ const VerifyOTP= () => {
                 email, 
                 otp: otpString
             });
-            alert(data.message);
+            toast.success(data.message);
             Cookies.set("token", data.token,{
                 expires:15,
                 secure: false,
@@ -95,6 +96,8 @@ const VerifyOTP= () => {
             inputRefs.current[0]?.focus();
             setUser(data.user);
             setIsAuth(true);
+            fetchChats();
+            fetchUsers();
         }
         catch (error: any){
             setError(error.response.data.message);
@@ -112,7 +115,7 @@ const VerifyOTP= () => {
             const {data} = await axios.post(`${user_service}/api/v1/login`, {
                 email,
             });
-            alert(data.message);
+            toast.success(data.message);
             setTimer(60);
         }catch(error: any){
             setError(error.response.data.message);
@@ -124,7 +127,11 @@ const VerifyOTP= () => {
 
     if(userLoading) return <Loading />;
 
-    if(isAuth) redirect("/chat")
+    useEffect(() => {
+      if (isAuth) {
+        router.push("/chat");
+      }
+    }, [isAuth, router]);
 
   return (
      <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
