@@ -27,7 +27,6 @@ const MessageInput = ({
         await handleMessageSend(e, imageFile);
         setImageFile(null);
         setIsUploading(false);
-
     }
 
     if(!selectedUser) return null;
@@ -82,7 +81,6 @@ const MessageInput = ({
                             }
                 </button>
             </div>
-
         </form>
     )
 }

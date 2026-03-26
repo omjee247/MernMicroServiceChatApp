@@ -100,7 +100,8 @@ const VerifyOTP= () => {
             fetchUsers();
         }
         catch (error: any){
-            setError(error.response.data.message);
+            const errorMessage = error?.response?.data?.message || "Verification failed";
+            setError(errorMessage);
         }
         finally{
             setLoading(false);
@@ -118,7 +119,8 @@ const VerifyOTP= () => {
             toast.success(data.message);
             setTimer(60);
         }catch(error: any){
-            setError(error.response.data.message);
+            const errorMessage = error?.response?.data?.message || "Failed to resend OTP";
+            setError(errorMessage);
         }
         finally{
             setResendLoading(false);
